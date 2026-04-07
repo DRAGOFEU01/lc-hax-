@@ -6,12 +6,12 @@ using UnityEngine;
 
 [HarmonyPatch(typeof(PlayerControllerB))]
 sealed class InvisiblePatch {
-    [HarmonyPatch("UpdatePlayerPositionRpc")]
+    [HarmonyPatch(nameof(PlayerControllerB.UpdatePlayerPositionRpc))]
     static void Prefix(
         ulong ___actualClientId,
         ref Vector3 newPos,
         ref bool inElevator,
-        ref bool inShipRoom,
+        ref bool isInShip,
         ref bool exhausted,
         ref bool isPlayerGrounded
     ) {
@@ -20,7 +20,7 @@ sealed class InvisiblePatch {
 
         newPos = new Vector3(0.0f, -100.0f, 0.0f);
         inElevator = false;
-        inShipRoom = false;
+        isInShip = false;
         exhausted = false;
         isPlayerGrounded = true;
     }

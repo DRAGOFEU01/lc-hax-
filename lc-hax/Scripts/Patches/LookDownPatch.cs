@@ -16,12 +16,12 @@ sealed class LookDownPatch {
     }
 
     [HarmonyTranspiler]
-    [HarmonyPatch("CalculateSmoothLookingInput")]
+    [HarmonyPatch(nameof(PlayerControllerB.CalculateSmoothLookingInput))]
     static IEnumerable<CodeInstruction> SmoothLookingTranspiler(IEnumerable<CodeInstruction> instructions) =>
         LookDownPatch.CalculateLookingInputTranspiler(instructions);
 
     [HarmonyTranspiler]
-    [HarmonyPatch("CalculateNormalLookingInput")]
+    [HarmonyPatch(nameof(PlayerControllerB.CalculateNormalLookingInput))]
     static IEnumerable<CodeInstruction> NormalLookingTranspiler(IEnumerable<CodeInstruction> instructions) =>
         LookDownPatch.CalculateLookingInputTranspiler(instructions);
 }

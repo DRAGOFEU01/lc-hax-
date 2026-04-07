@@ -1,12 +1,12 @@
 #pragma warning disable IDE1006
 
+using GameNetcodeStuff;
 using HarmonyLib;
 using Steamworks;
-using GameNetcodeStuff;
 
 [HarmonyPatch(typeof(PlayerControllerB))]
 sealed class AntiKickPatch {
-    [HarmonyPatch("SendNewPlayerValuesServerRpc")]
+    [HarmonyPatch(nameof(PlayerControllerB.SendNewPlayerValuesServerRpc))]
     static bool Prefix(PlayerControllerB __instance) {
         if (!Setting.EnableAntiKick) return true;
 
@@ -24,7 +24,7 @@ sealed class AntiKickPatch {
         return false;
     }
 
-    [HarmonyPatch("SendNewPlayerValuesClientRpc")]
+    [HarmonyPatch(nameof(PlayerControllerB.SendNewPlayerValuesClientRpc))]
     static void Postfix(PlayerControllerB __instance) {
         if (!Setting.EnableAntiKick) return;
         if (Helper.LocalPlayer is not PlayerControllerB localPlayer) return;

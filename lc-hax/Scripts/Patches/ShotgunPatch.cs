@@ -10,7 +10,7 @@ sealed class ShotgunPatch {
     /// <summary>
     /// Prevents the shotgun from consuming ammo when firing
     /// </summary>
-    [HarmonyPatch(typeof(ShotgunItem), "FindAmmoInInventory")]
+    [HarmonyPatch(typeof(ShotgunItem), nameof(ShotgunItem.FindAmmoInInventory))]
     static bool Prefix(ref int __result, ref int ___ammoSlotToUse) {
         ___ammoSlotToUse = -2;
         __result = -2;
@@ -29,7 +29,7 @@ sealed class ShotgunPatch {
     /// <summary>
     /// Resets the interrupt flag
     /// </summary>
-    [HarmonyPatch(typeof(ShotgunItem), "StopUsingGun")]
+    [HarmonyPatch(typeof(ShotgunItem), nameof(ShotgunItem.StopUsingGun))]
     static void Postfix() => ShotgunPatch.InterruptDestroyItem = false;
 
     /// <summary>

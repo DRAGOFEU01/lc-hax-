@@ -12,7 +12,7 @@ sealed class LobbyPatch {
         __instance.censorOffensiveLobbyNames = false;
     }
 
-    [HarmonyPatch("loadLobbyListAndFilter")]
+    [HarmonyPatch(nameof(SteamLobbyManager.loadLobbyListAndFilter))]
     static void Prefix(ref Lobby[] ___currentLobbyList) {
         ___currentLobbyList
             .AsValueEnumerable()

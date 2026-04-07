@@ -4,7 +4,7 @@ using GameNetcodeStuff;
 using HarmonyLib;
 using ZLinq;
 
-[HarmonyPatch(typeof(HUDManager), "EnableChat_performed")]
+[HarmonyPatch(typeof(HUDManager), nameof(HUDManager.EnableChat_performed))]
 sealed class EnableChatPatch {
     static void Prefix(HUDManager __instance, ref bool __state) {
         if (__instance.localPlayer is not PlayerControllerB localPlayer) return;
@@ -18,7 +18,7 @@ sealed class EnableChatPatch {
 }
 
 [HarmonyBefore]
-[HarmonyPatch(typeof(HUDManager), "SubmitChat_performed")]
+[HarmonyPatch(typeof(HUDManager), nameof(HUDManager.SubmitChat_performed))]
 sealed class SubmitChatPatch {
     static bool Prefix(HUDManager __instance, ref bool __state) {
         __state = __instance.localPlayer.isPlayerDead;
