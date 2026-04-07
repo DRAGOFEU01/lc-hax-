@@ -14,5 +14,6 @@ sealed class InvisibleCommand : ICommand {
         if (Setting.EnableInvisible) {
             InvisibleCommand.ImmediatelyUpdatePlayerPosition();
         }
+        await Task.CompletedTask;
     }
 }
